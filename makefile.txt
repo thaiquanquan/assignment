@@ -1,0 +1,20 @@
+CC=gcc
+CFLAGS=-I.
+DEPS = sudoku.h
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+sudoku: sudoku.o
+	$(CC) -o sudoku sudoku.o $(CFLAGS)
+
+.PHONY: clean
+
+clean:
+	rm -f *.o sudoku
+.PHONY: check
+
+check:
+	@echo "Running tests..."
+	./sudoku 000105000140000670080002400063070010900000003010090520007200080026000035000409000
+	@echo "Tests completed."
